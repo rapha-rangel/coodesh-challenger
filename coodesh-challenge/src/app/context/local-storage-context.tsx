@@ -1,11 +1,11 @@
 "use client"
 
 import { useEffect, createContext, useState, ReactNode} from "react";
-import { RadiosTypes } from "../types/radios";
+import { LocalStorageRadiosTypes, RadiosTypes } from "../types/radios";
 
 interface LocalStorageContextType{
-  items: RadiosTypes[];
-  updateLocalStorage:(value: RadiosTypes[])=>void
+  items: LocalStorageRadiosTypes[];
+  updateLocalStorage:(value: LocalStorageRadiosTypes[])=>void
 }
 
 export const LocalStorageContext = createContext<LocalStorageContextType>({
@@ -18,19 +18,19 @@ interface ProviderProps{
 }
 
 export function LocalStorageContextProvider({children}: ProviderProps){
-  const [items, setItems] = useState<RadiosTypes[]>([]);
+  const [items, setItems] = useState<LocalStorageRadiosTypes[]>([]);
 
   useEffect(() => {
     if( typeof window === "undefined") return;
-    const value = window.localStorage.getItem("cart-items")
+    const value = window.localStorage.getItem("radio-items")
     if(value){ 
       setItems(JSON.parse(value));
     }
   }, [ ])
 
-  const updateLocalStorage =(value:RadiosTypes[])=>{
+  const updateLocalStorage =(value:LocalStorageRadiosTypes[])=>{
     setItems(value)
-    localStorage.setItem("cart-items", JSON.stringify(value))
+    localStorage.setItem("radio-items", JSON.stringify(value))
   }
 
   return (

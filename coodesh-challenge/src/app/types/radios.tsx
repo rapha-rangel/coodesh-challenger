@@ -36,3 +36,11 @@ export interface RadiosTypes {
   url_resolved:string
   votes:number
 }
+
+export interface LocalStorageRadiosTypes {
+  changeuuid:string
+  name:string
+  favicon:string
+  url:string
+  votes:number
+}

@@ -4,7 +4,9 @@ import { ReactNode, createContext, useState } from "react";
 
 export const ModalSwitchContext = createContext({
   openNavbar:false,
-  handleOpenNavbar: () =>{}
+  handleOpenNavbar: () =>{},
+  openPlayer:false,
+  handleOpenPlayer: () =>{}
 })
 
 interface ProviderProps{
@@ -13,15 +15,21 @@ interface ProviderProps{
 
 export function ModalSwitchContextProvider({children}: ProviderProps){
   const [openNavbar, setOpenNavbar]= useState(false);
+  const [openPlayer, setOpenPlayer]= useState(false);
 
   const handleOpenNavbar =()=>{
     setOpenNavbar(prev=> !prev)
   }
 
+  const handleOpenPlayer =()=>{
+    setOpenPlayer(prev=> !prev)
+  }
+
   return(
     <ModalSwitchContext.Provider 
       value={{
-        openNavbar, handleOpenNavbar
+        openNavbar, handleOpenNavbar,
+        openPlayer, handleOpenPlayer
       }}>
       {children}
     </ModalSwitchContext.Provider>

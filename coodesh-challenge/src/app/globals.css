@@ -11,6 +11,7 @@
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --iconsColor: #1267FC;
   }
 }
 
@@ -27,4 +28,28 @@ body {
 .verticalText {
   writing-mode: vertical-lr;
   text-orientation: upright;
+}
+
+.horizontalText {
+  writing-mode:horizontal-tb;
+}
+
+::-webkit-scrollbar {
+	width: 5px;
+	height: 10px;
+}
+ 
+::-webkit-scrollbar-button:start:decrement,
+::-webkit-scrollbar-button:end:increment  {
+	display: none;
+}
+ 
+::-webkit-scrollbar-track-piece  {
+	background-color: #2F2F33;
+	-webkit-border-radius: 6px;
+}
+ 
+::-webkit-scrollbar-thumb:vertical {
+	background-color: #666;
+	-webkit-border-radius: 6px;
 }

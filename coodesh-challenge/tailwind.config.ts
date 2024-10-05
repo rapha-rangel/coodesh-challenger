@@ -21,6 +21,7 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        "iconsColor": "#1267FC"
       },
     },
   },
