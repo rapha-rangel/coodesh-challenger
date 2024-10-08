@@ -38,9 +38,24 @@ export interface RadiosTypes {
 }
 
 export interface LocalStorageRadiosTypes {
-  changeuuid:string
+  id:string
   name:string
-  favicon:string
+  img:string
   url:string
-  votes:number
+  country:string
+  nickname:string
+}
+
+export interface UserTypes {
+  user:string
+  isLogged: boolean
+  favorites:LocalStorageRadiosTypes[]
+}
+
+export interface PlayerRadioTypes {
+  id:string
+  name:string
+  img:string
+  url:string
+  country:string
 }

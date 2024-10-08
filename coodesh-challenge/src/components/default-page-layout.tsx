@@ -7,7 +7,7 @@ interface DefaultProviderProps {
 export default function DefaultLayout({children}: DefaultProviderProps) {
   
   return (
-    <section className="px-[16px] pt-[12px] bg-[#2F2F33] md:pt-[24px] md:pr-[50px]">
+    <section className="px-[16px] pt-[12px]  md:pt-[24px] md:px-[50px]">
       {children}
     </section>
   )
