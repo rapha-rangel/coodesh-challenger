@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import DefaultLayout from "../../components/default-page-layout";
 import Header from "../../components/header";
 import Main from "../../components/main";
@@ -46,19 +46,18 @@ export default function RadioMain() {
   },[formatPageParams])
 
   return (
-    <>
-    {userRadio.isLogged?
-      <NavBar/>
-      :null
-    } 
-      <Player/>
-      <EditNicknameModal/>
-      <DefaultLayout>
-        <Header/>
-        <Main/>
-      </DefaultLayout>
-    </>
-      
+    <Suspense> 
+      {userRadio.isLogged?
+        <NavBar/>
+        :null
+      } 
+        <Player/>
+        <EditNicknameModal/>
+        <DefaultLayout>
+          <Header/>
+          <Main/>
+        </DefaultLayout>
+    </Suspense >
   );
 }
 

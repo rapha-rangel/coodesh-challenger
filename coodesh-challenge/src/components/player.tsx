@@ -10,7 +10,6 @@ export default function Player (){
 	const {openPlayer, playerInfo, playRadio, stopRadio, playing, audioRef, loadingPlay}= useRadioPlayer();
 	const {userRadio, updateLocalStorage} = useLocalStorage();
 	useEffect(()=>{
-		console.log(playerInfo)
 	},[playerInfo])
 
   return(

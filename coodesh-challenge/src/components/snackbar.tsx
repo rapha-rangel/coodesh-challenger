@@ -7,7 +7,6 @@ interface SnackbarProps {
 
 export default function Snackbar ({title, content}:SnackbarProps){
   const {openSnackbar} = useModalSwitch();
-  console.log(openSnackbar)
   return(
     <div className={`fixed left-[50%] -translate-x-[50%] bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md transition-all duration-500
       ${openSnackbar? "bottom-0 transition-all duration-250": "-bottom-20"}`}>
