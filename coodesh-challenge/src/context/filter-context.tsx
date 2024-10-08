@@ -2,10 +2,14 @@
 
 import { FilterSearchType } from "../types/filter-search";
 import { ReactNode, createContext, useState } from "react";
+interface FilterContexttType{
+  type: FilterSearchType;
+  handleTypes:(value: FilterSearchType)=>void
+}
 
-export const FilterContext = createContext({
+export const FilterContext = createContext<FilterContexttType>({
   type: FilterSearchType.RADIO,
-  handleTypes: (value: FilterSearchType)=> {},
+  handleTypes: ()=> {},
 })
 
 interface ProviderProps{

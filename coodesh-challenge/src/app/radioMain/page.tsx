@@ -26,7 +26,7 @@ export default function RadioMain() {
     return () => {
       window.removeEventListener('resize', handleResponsiveSwicthNavbar);
     };
-  }, []);
+  }, [handleCloseNavbar]);
 
   useEffect(()=>{
     const userOnLocalStorage = localStorage.getItem("user-radio");
@@ -43,7 +43,7 @@ export default function RadioMain() {
         updateUserRadio(newUser)
       }
     }
-  },[])
+  },[formatPageParams])
 
   return (
     <>
