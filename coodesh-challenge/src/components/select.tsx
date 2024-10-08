@@ -2,11 +2,11 @@ import { useFilterSearch } from "@/hooks/useFilterSearch";
 import { useModalSwitch } from "@/hooks/useModalSwicth";
 import { FilterSearchType } from "@/types/filter-search";
 export default function Select (){
-    const {type, setType} = useFilterSearch();
+    const {handleTypes} = useFilterSearch();
     const {openNavbar}=useModalSwitch();
   
     const handleType = (value: FilterSearchType)=>{
-      setType(value)
+      handleTypes(value)
     }
   return(
     <form className={`${openNavbar?"hidden":"block"}  max-w-sm mx-auto absolute right-1 md:-right-2 bottom-0 z-20 w-[70px]`}>

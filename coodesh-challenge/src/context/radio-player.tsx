@@ -2,7 +2,6 @@
 
 import { LegacyRef, ReactNode, createContext, useEffect, useRef, useState } from "react";
 import { PlayerRadioTypes } from "../types/radios";
-import { useModalSwitch } from "@/hooks/useModalSwicth";
 
 interface RadioPlayerContextType{
   playerInfo: PlayerRadioTypes;

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useModalSwitch } from "../hooks/useModalSwicth"
 import { LocalStorageRadiosTypes} from "../types/radios";
 import { useFecthRadios } from "../hooks/useFetchRadios";
-import { useFilterSearch } from "@/hooks/useFilterSearch";
+
 interface InputProps{
   radiosList:LocalStorageRadiosTypes[]
   setRadiosList: React.Dispatch<React.SetStateAction<LocalStorageRadiosTypes[]>>
@@ -12,7 +12,6 @@ interface InputProps{
 export default function InputSearch ({radiosList,setRadiosList, name}:InputProps) {
   const [inputValue, setInputValue] = useState("");
   const{ openNavbar} =useModalSwitch();
-  const {setSearch} = useFilterSearch();
   const {searchFechterRadios, setLoading} = useFecthRadios();
 
   const handleChange= (e:React.ChangeEvent<HTMLInputElement>)=>{

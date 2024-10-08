@@ -4,10 +4,8 @@ import { FilterSearchType } from "../types/filter-search";
 import { ReactNode, createContext, useState } from "react";
 
 export const FilterContext = createContext({
-  search:"",
   type: FilterSearchType.RADIO,
-  setSearch: (value: string)=> {},
-  setType: (value: FilterSearchType)=> {},
+  handleTypes: (value: FilterSearchType)=> {},
 })
 
 interface ProviderProps{
@@ -15,16 +13,17 @@ interface ProviderProps{
 }
 
 export function FilterContextProvider({children}: ProviderProps){
-  const [search, setSearch]= useState("");
   const [type, setType]= useState(FilterSearchType.RADIO);
+
+  const handleTypes =(value: FilterSearchType)=>{
+    setType(value)
+  }
 
   return(
     <FilterContext.Provider 
       value={{
-        search, 
         type,  
-        setSearch, 
-        setType 
+        handleTypes 
       }}>
       {children}
     </FilterContext.Provider>

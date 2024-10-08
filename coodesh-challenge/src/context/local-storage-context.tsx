@@ -1,6 +1,6 @@
 "use client"
 
-import { createContext, useState, ReactNode, useEffect} from "react";
+import { createContext, useState, ReactNode} from "react";
 import {  UserTypes} from "../types/radios";
 
 interface LocalStorageContextType{

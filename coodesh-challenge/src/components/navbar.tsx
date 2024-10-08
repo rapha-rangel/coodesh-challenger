@@ -1,5 +1,3 @@
-import navBarIcon from '../assets/icons/navbar_icon.png';
-import Image from "next/image";
 import { useModalSwitch } from '../hooks/useModalSwicth';
 import { useEffect, useState } from 'react';
 import { useLocalStorage } from '../hooks/useLocalStorage';
