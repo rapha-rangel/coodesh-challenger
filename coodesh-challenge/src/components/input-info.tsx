@@ -9,6 +9,8 @@ interface InputInfoProps {
 export default function InputInfo ({inputValue,setInputValue, type, placeholder,label}: InputInfoProps) {
 
   const handleChange= (e:React.ChangeEvent<HTMLInputElement>)=>{
+    const emailValidate=/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    console.log(emailValidate.test(e.target.value))
     setInputValue(e.target.value);
   } 
   return (

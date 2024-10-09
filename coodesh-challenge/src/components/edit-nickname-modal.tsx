@@ -32,11 +32,13 @@ export default function EditNicknameModal(){
           type={"button"}
           name={"update"}
           action={handleChange}
+          formLoading={false}
         />
         <ButtonInfo
           type={"button"}
           name={"cancel"}
           action={handleClose}
+          formLoading={false}
         />
       </div>
       

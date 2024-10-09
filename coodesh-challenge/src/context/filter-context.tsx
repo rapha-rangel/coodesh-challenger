@@ -20,7 +20,8 @@ export function FilterContextProvider({children}: ProviderProps){
   const [type, setType]= useState(FilterSearchType.RADIO);
 
   const handleTypes =(value: FilterSearchType)=>{
-    setType(value)
+    setType(value);
+    console.log(type)
   }
 
   return(

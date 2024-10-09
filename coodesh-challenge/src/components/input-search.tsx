@@ -36,7 +36,7 @@ export default function InputSearch ({radiosList,setRadiosList, name}:InputProps
     ${openNavbar? "opacity-100 transition-all duration-500 delay-200 ":"opacity-0"}`}>
       <input type="text" placeholder="Search here" onChange={(e)=> handleChange(e)}
         value={inputValue}
-        className="placeholder-white outline-none bg-[#62626C]  px-[20px] py-[9px] text-subtitleFontSize md:w-full
+        className="placeholder-white outline-none bg-[#62626C]  px-[20px] py-[9px] text-subtitleFontSize md:w-full z-10
           shadow-[inset_0px_4px_4px_0px_#00000040] rounded-[10px] text-subtitleLineHeight font-light text-white"/>
     </label>
   )

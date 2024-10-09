@@ -5,30 +5,35 @@ import InputInfo from "@/components/input-info";
 import Snackbar from "@/components/snackbar";
 import { useModalSwitch } from "@/hooks/useModalSwicth";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 
 export default function Home() {
   const [inputEmail, setInputEmail] = useState("");
   const [inputPassword, setInputPassword] = useState("");
   const router = useRouter();
-  const {handleOpenSnackbar} = useModalSwitch()
+  const {handleOpenSnackbar} = useModalSwitch();
+  const [formLoading, seFormLoading] = useState(false);
 
-  const handlePage=(e: { preventDefault: () => void} )=>{
+  const handlePage=(e:FormEvent<HTMLFormElement>)=>{
+    seFormLoading(true);
     e.preventDefault();
     if(inputEmail ==="rcr@gmail.com" && inputPassword==="123456"){
-      router.push(`/radioMain?user=rcr`) 
+      router.push(`/radioPage?user=rcr`, { scroll: false });
     } else{
-    handleOpenSnackbar();
+      setTimeout(()=>{
+        seFormLoading(false);
+        handleOpenSnackbar();
+      }, 2000)
     }
   }
 
   const handleEnterWithoutLogin =()=>{
-    router.push(`/radioMain`) 
+    router.push(`/radioPage`, { scroll: false });
   }
 
   return (
     <section className="bg-[#2F2F33] w-full h-screen">
-      <form onSubmit={handlePage} className=" absolute left-[50%] top-[50%] -translate-y-[50%] -translate-x-[50%]">
+      <form onSubmit={(e)=>handlePage(e)} className=" absolute left-[50%] top-[50%] -translate-y-[50%] -translate-x-[50%]">
         <h3 className="text-white font-bold text-3xl mb-6">Radio Browser</h3> 
         <div className="flex flex-col gap-6 mb-10">
           <InputInfo
@@ -51,11 +56,13 @@ export default function Home() {
             type={"submit"}
             name={"login"}
             action={()=>{}}
+            formLoading={formLoading}
           />
           <ButtonInfo
             type={"button"}
             name={"enter"}
             action={handleEnterWithoutLogin}
+            formLoading={false}
           />
         </div>
       </form>

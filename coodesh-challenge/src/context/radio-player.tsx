@@ -2,6 +2,7 @@
 
 import { LegacyRef, ReactNode, createContext, useEffect, useRef, useState } from "react";
 import { PlayerRadioTypes } from "../types/radios";
+import { useModalSwitch } from "@/hooks/useModalSwicth";
 
 interface RadioPlayerContextType{
   playerInfo: PlayerRadioTypes;
@@ -12,7 +13,8 @@ interface RadioPlayerContextType{
   playRadio:()=> void,
   stopRadio:()=>void,
   audioRef:LegacyRef<HTMLAudioElement> ,
-  loadingPlay: boolean
+  loadingPlay: boolean,
+  handleClosePlayer:()=> void
 }
 
 export const RadioPlayerContext = createContext<RadioPlayerContextType>({
@@ -24,7 +26,8 @@ export const RadioPlayerContext = createContext<RadioPlayerContextType>({
   playRadio:()=>{},
   stopRadio:()=>{},
   audioRef: null,
-  loadingPlay:false
+  loadingPlay:false,
+  handleClosePlayer:()=>{}
 })
 
 interface ProviderProps{
@@ -39,15 +42,22 @@ export function RadioPlayerContextProvider({children}: ProviderProps){
   const [playing, setPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
   const [loadingPlay, setLoadingPlay] =useState(false);
+  const {handleOpenSnackbar} = useModalSwitch()
 
   useEffect(() => {
   }, [audioRef]);
 
   const handleOpenPlayer =(value:PlayerRadioTypes)=>{
     setPlayerInfo(value);
-    setPlaying(false);
     stopRadio();
     if(openPlayer===false) setOpenPlayer(true);
+  }
+
+  const handleClosePlayer =()=>{
+    const reset ={id:"",  name:"", url:"", img:"", country:""}
+    setPlayerInfo(reset);
+    stopRadio();
+    setOpenPlayer(false);
   }
 
   const runPlayRadio=(value:PlayerRadioTypes)=>{
@@ -62,6 +72,7 @@ export function RadioPlayerContextProvider({children}: ProviderProps){
       audioRef.current?.play();
       if(audioRef.current?.duration !== Infinity){
         audioRef.current?.pause();
+        handleOpenSnackbar();
         setPlaying(false);
       } else{
         setPlaying(true);
@@ -78,7 +89,9 @@ export function RadioPlayerContextProvider({children}: ProviderProps){
   return(
     <RadioPlayerContext.Provider 
       value={{
-        openPlayer, handleOpenPlayer, playerInfo, runPlayRadio, playing, playRadio, stopRadio, audioRef, loadingPlay
+        openPlayer, handleOpenPlayer, playerInfo, runPlayRadio, 
+        playing, playRadio, stopRadio, audioRef, loadingPlay,
+        handleClosePlayer
       }}>
       {children}
     </RadioPlayerContext.Provider>

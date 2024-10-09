@@ -35,6 +35,7 @@ export function ModalSwitchContextProvider({children}: ProviderProps){
     setOpenEditModal(prev=>!prev);
   };
   const handleOpenNavbar =()=>{
+    console.log("opne")
     setOpenNavbar(prev=> !prev);
   };
 
