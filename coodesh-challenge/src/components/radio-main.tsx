@@ -13,7 +13,7 @@ import Snackbar from "../components/snackbar";
 
 
 export default function RadioMain() {
-  const {handleCloseNavbar, openEditModal} = useModalSwitch();
+  const {handleCloseNavbar} = useModalSwitch();
   const { updateUserRadio} = useLocalStorage();
   const pageParams = useSearchParams();
   const formatPageParams = pageParams.toString().slice(5, pageParams.toString().length);
