@@ -16,16 +16,16 @@ export  function DefaultProvider({children}: DefaultProviderProps) {
 
   
   return (
-    <LocalStorageContextProvider>
-      <FilterContextProvider>
-        <FetchRadiosContextProvider>
-          <ModalSwitchContextProvider>
-            <RadioPlayerContextProvider>
-              {children}
-            </RadioPlayerContextProvider>
-          </ModalSwitchContextProvider>
-        </FetchRadiosContextProvider>
-      </FilterContextProvider>
-    </LocalStorageContextProvider>
+    <ModalSwitchContextProvider>
+      <LocalStorageContextProvider>
+        <FilterContextProvider>
+          <FetchRadiosContextProvider>
+              <RadioPlayerContextProvider>
+                {children}
+              </RadioPlayerContextProvider>
+          </FetchRadiosContextProvider>
+        </FilterContextProvider>
+      </LocalStorageContextProvider>
+    </ModalSwitchContextProvider>
   )
 }

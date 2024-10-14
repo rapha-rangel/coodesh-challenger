@@ -1,8 +1,8 @@
 
 import noImage from '../assets/no_image_available.jpg';
-export default function imageNotFound (image: string){
-  if(image){
-    return image
+export default function imageNotFound (url: string){
+  if(url){
+    return url
   } else{ 
     return noImage.src
   }

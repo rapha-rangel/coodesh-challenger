@@ -24,6 +24,21 @@ const config: Config = {
         "iconsColor": "#1267FC"
       },
     },
+    keyframes: {
+      fadeOutDisplay: {
+        '0%': { opacity:"0" },
+        '100%': { opacity:"1" },
+      },
+      fadeOutImage: {
+        '0%': { opacity:"1", backgroundColor:"#88aafe", filter: "blur(0px)"},
+        '20%': { opacity:"1", backgroundColor:"#88aafe" ,filter: "blur(4px)"},
+        '60%': { opacity:"0", backgroundColor:"transparent" },
+      }
+    },
+    animation: {
+      fadeoutDisplayRadios: 'fadeOutDisplay 1s ease-in-out',
+      fadeoutImage: 'fadeOutImage 2s ease-in-out'
+    },
   },
   plugins: [],
 };

@@ -5,16 +5,18 @@ import { LocalStorageRadiosTypes } from '../types/radios';
 import InputSearch from './input-search';
 import DisplayFavoritesRadios from './display-favorites-radios';
 import { FaStream } from "react-icons/fa";
+import { useRadioPlayer } from '@/hooks/useRadioPlayer';
 
 
 export default function NavBar() {
   const { openNavbar,handleOpenNavbar, openEditModal} = useModalSwitch();
   const {userRadio, updateLocalStorage}= useLocalStorage();
   const [filterFavoriteRadiosList, setFilterFavoriteRadiosList]=useState<LocalStorageRadiosTypes[]>([]);
+  const {openPlayer} = useRadioPlayer()
 
   useEffect(()=>{
-    setFilterFavoriteRadiosList(userRadio.favorites);
-  },[userRadio.favorites])
+    if(userRadio) setFilterFavoriteRadiosList(userRadio.favorites)
+  },[userRadio])
 
   const removeRadioFromFavoriteList =(id:string)=>{
     const removedRadio = userRadio.favorites.filter(item=> item.id !==id);
@@ -22,10 +24,11 @@ export default function NavBar() {
   }
   
   return (
-    <section className={`opacity-0 fixed left-0  h-screen border-r-2 border-[#8d8a8a39] bg-[#2F2F33] pt-[12px] mr-4 z-10 transition-all md:w-1/4 
-      ${openEditModal?"opacity-0": "opacity-100"}
+    <section className={`opacity-0 fixed left-0  h-screen border-r-2 border-[#8d8a8a39] bg-[#2F2F33] pt-[12px] mr-4 z-10 transition-all duration-250 md:w-1/4 
+      ${openEditModal?"opacity-30": "opacity-100"}
       ${openNavbar ?"w-full ": " w-[50px]"}
-      `}>
+      ${openPlayer ?"pb-14": "p-0"}
+    `}>
       <header className="flex flex-row items-center gap-[22px] w-full border-[#8d8a8a39] pb-[10px] border-b-2 cursor-pointer">
         <FaStream className={`ml-[11px] min-w-[30px] min-h-[25px] md:hidden text-iconsColor`}
           onClick={()=>handleOpenNavbar()}/>

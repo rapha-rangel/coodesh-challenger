@@ -2,7 +2,6 @@ import { FaPen, FaTrash, FaPlay } from "react-icons/fa";
 import { useModalSwitch } from "../hooks/useModalSwicth";
 import { LocalStorageRadiosTypes } from "../types/radios";
 import { useRadioPlayer } from "../hooks/useRadioPlayer";
-import { useLocalStorage } from "../hooks/useLocalStorage";
 import imageNotFound from "../utils/image-not-found";
 
 interface DisplayRadiosProps{
@@ -11,8 +10,7 @@ interface DisplayRadiosProps{
 }
 
 export default function DisplayFavoritesRadios({filterFavoriteRadiosList,removeRadioFromFavoriteList}:DisplayRadiosProps) {
-  const {openNavbar, openEditModal}= useModalSwitch();
-  const {handleOpenEditModal} = useLocalStorage();
+  const {openNavbar, openEditModal, handleOpenEditModal}= useModalSwitch();
   const {handleOpenPlayer, runPlayRadio, playerInfo, playing} = useRadioPlayer();
 
 
@@ -60,7 +58,7 @@ export default function DisplayFavoritesRadios({filterFavoriteRadiosList,removeR
             </div>
             <div className={`transition-all duration-500 items-center gap-4 md:flex md:opacity-100 ${openNavbar? "opacity-100 flex": "opacity-0 hidden"} md:hidden md:opacity-0 md:group-hover:flex md:group-hover:opacity-100`}>
               <FaPen className="transition-all duration-500 text-white hover:text-iconsColor cursor-pointer"
-                onClick={()=>handleOpenEditModal(radio.id)}/>
+                onClick={()=>handleOpenEditModal({id:radio.id, name:radio.nickname})}/>
               <FaTrash className="transition-all duration-500 text-white hover:text-iconsColor cursor-pointer"
                 onClick={()=>removeRadioFromFavoriteList(radio.id)}
               />

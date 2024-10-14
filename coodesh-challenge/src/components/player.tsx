@@ -5,15 +5,19 @@ import imageNotFound from "../utils/image-not-found";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { addOrRemoveRadioPlaylist } from "../utils/add-favorite-playlist";
 import Loading from "./loading";
+import { useModalSwitch } from "@/hooks/useModalSwicth";
 
 export default function Player (){
 	const {openPlayer, playerInfo, playRadio, stopRadio, playing, audioRef, loadingPlay}= useRadioPlayer();
 	const {userRadio, updateLocalStorage} = useLocalStorage();
+	const {openEditModal} = useModalSwitch();
+
 	useEffect(()=>{
 	},[playerInfo])
 
   return(
-		<section className={`fixed flex justify-between items-center px-8 py-2 bg-[#2F2F33] w-full z-20 border-t-2 border-b-2 border-b-[#2F2F33] border-[#8d8a8a39] transition-all duration-500
+		<section className={`fixed flex justify-between items-center px-8 py-2 bg-[#2F2F33] w-full z-20 border-t-2 border-b-2 border-b-[#2F2F33] border-[#8d8a8a39] transition-all duration-250
+			${openEditModal?"opacity-20":"opacity-100"}
 			${openPlayer? "bottom-0 transition-all duration-500":"-bottom-16 "}`}>
 			<div className="flex gap-8 items-center ">
 				<img src={imageNotFound(playerInfo.img)} alt="logo"

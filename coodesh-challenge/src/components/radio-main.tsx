@@ -13,7 +13,7 @@ import Snackbar from "../components/snackbar";
 
 
 export default function RadioMain() {
-  const {handleCloseNavbar} = useModalSwitch();
+  const {handleCloseNavbar, openEditModal} = useModalSwitch();
   const { updateUserRadio} = useLocalStorage();
   const pageParams = useSearchParams();
   const formatPageParams = pageParams.toString().slice(5, pageParams.toString().length);
@@ -30,24 +30,26 @@ export default function RadioMain() {
 
   useEffect(()=>{
     const userOnLocalStorage = localStorage.getItem("user-radio");
-    if(formatPageParams){
-      if(userOnLocalStorage ){
-        const user = JSON.parse(userOnLocalStorage);
+    if(userOnLocalStorage ){
+      const user = JSON.parse(userOnLocalStorage);
+      if(formatPageParams){
         if(user.user ===formatPageParams){
           updateUserRadio({...user, isLogged:true})
           }
-      }else{
-        const newUser ={
-          user:formatPageParams, isLogged: false, favorites:[]
-        }
-        updateUserRadio(newUser)
+      } else{
+        updateUserRadio({...user, isLogged:false})
       }
+    }else{
+      const newUserEnter ={
+        user:formatPageParams, isLogged: true, favorites:[]
+      }
+      updateUserRadio(newUserEnter)
     }
-  },[formatPageParams, updateUserRadio])
+  },[])
 
   return (
-    <> 
-      {formatPageParams?
+    <section > 
+      {formatPageParams.length>0?
         <NavBar/>
         :null
       } 
@@ -58,7 +60,7 @@ export default function RadioMain() {
           <Header/>
           <Main/>
         </DefaultLayout>
-    </>
+    </section>
   );
 }
 

@@ -15,7 +15,7 @@ interface FetchRadiosContextType{
     range: number, offset:number
   )=> void
   loadingShowMore:boolean
-
+  fetcher:()=> void
 }
 
 export const FetchRadiosContext = createContext<FetchRadiosContextType>({
@@ -25,6 +25,7 @@ export const FetchRadiosContext = createContext<FetchRadiosContextType>({
   setLoading:()=>{},
   showMoreRadios:()=>{},
   loadingShowMore: false,
+  fetcher:()=> {}
 })
 
 interface ProviderProps{
@@ -37,11 +38,16 @@ export function FetchRadiosContextProvider({children}: ProviderProps){
   const [searchInput, setSearchInput] = useState("")
   const [loadingShowMore, setLoadingShowMore] = useState(false);
   const {type} = useFilterSearch();
+
   useEffect(() => {
     fetcher()
   }, []);
 
-  
+  const selectedType=()=>{
+    if(type ===FilterSearchType.RADIO) return "name"
+    if(type ===FilterSearchType.COUNTRY) return "country"
+    if(type ===FilterSearchType.LANGUANGE) return "language" 
+  }
 
   const fetcher = async() =>{
     try{
@@ -62,11 +68,7 @@ export function FetchRadiosContextProvider({children}: ProviderProps){
     try{
       setLoading(true);
       setSearchInput(value);
-      let urlParam;
-      if(type ===FilterSearchType.RADIO) urlParam="name"
-      if(type ===FilterSearchType.COUNTRY) urlParam="country"
-      if(type ===FilterSearchType.LANGUANGE) urlParam="language" 
-      const url= `https://de1.api.radio-browser.info/json/stations/search?${urlParam}=${value}&limit=12`
+      const url= `https://de1.api.radio-browser.info/json/stations/search?${selectedType()}=${value}&limit=12`
       const response = await axios.get(url);
       if(response.status ===200){
         setFetcherResponse(response?.data)
@@ -82,11 +84,7 @@ export function FetchRadiosContextProvider({children}: ProviderProps){
   const showMoreRadios = async(range: number, offset:number)=>{
     try{
       setLoadingShowMore(true)
-      let urlParam;
-      if(type ===FilterSearchType.RADIO) urlParam="name"
-      if(type ===FilterSearchType.COUNTRY) urlParam="country"
-      if(type ===FilterSearchType.LANGUANGE) urlParam="language" 
-      const url= `https://de1.api.radio-browser.info/json/stations/search?${urlParam}=${searchInput}&limit=${range}&offset=${offset}`
+      const url= `https://de1.api.radio-browser.info/json/stations/search?${selectedType()}=${searchInput}&limit=${range}&offset=${offset}`
       console.log(url)
       const response = await axios.get(url);
       if(response.status ===200){
@@ -106,7 +104,7 @@ export function FetchRadiosContextProvider({children}: ProviderProps){
     <FetchRadiosContext.Provider
       value={{
         fetcherResponse, searchFechterRadios, loading, 
-        setLoading, showMoreRadios, loadingShowMore,
+        setLoading, showMoreRadios, loadingShowMore, fetcher
       }}
     >
       {children}

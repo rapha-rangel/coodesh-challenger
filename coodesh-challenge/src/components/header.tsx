@@ -7,13 +7,15 @@ import { CiLogin } from "react-icons/ci";
 import { useRouter } from 'next/navigation';
 import Select from './select';
 import { useRadioPlayer } from '@/hooks/useRadioPlayer';
+import { useModalSwitch } from '@/hooks/useModalSwicth';
 
 export default function Header (){
-	const {userRadio} = useLocalStorage();
+	const {userRadio, updateUserRadio} = useLocalStorage();
 	const router = useRouter();
 	const {handleClosePlayer} = useRadioPlayer();
 
 	const BackToLogin =()=>{
+		updateUserRadio({...userRadio, isLogged: false})
 		handleClosePlayer();
 		router.push("/");
 	}
